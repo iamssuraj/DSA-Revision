@@ -33,20 +33,18 @@ signed main()
     head->next = second;
     second->next = third;
     third->next = fourth;
-    cout << "Before Insertion" << endl;
-    display(head);
 
-    // After Insertion
     node *inserted = new node(23);
     second->next = inserted;
-    inserted->next = third;
-    cout << "After Insertion of 23" << endl;
+    inserted->next = third; // Insert 23
     display(head);
 
-    node *attach = new node(10);
-    attach->next = head;
-    head = attach;
-    cout << "After Insertion of 10" << endl;
+    //deleting 23
+
+    //1 --> 3 --> 23 --> 5 --> 7 --> NULL
+    second->next = fourth;
+    third->next = NULL;
     display(head);
+
     return 0;
 }
