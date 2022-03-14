@@ -22,7 +22,7 @@ public:
         next = NULL;
     }
 };
-Node *head = new Node(1);
+Node *head;
 void display(Node *temp)
 {
     while (temp != NULL)
@@ -45,7 +45,7 @@ int count(Node *head)
 }
 void append(Node *temp, int pos)
 {
-    int val = count(temp) - 2;
+    int val = count(temp) - pos;
     int i = 1;
     while (i < val - 1)
     {
@@ -66,20 +66,23 @@ void append(Node *temp, int pos)
 }
 signed main()
 {
-
-    Node *second = new Node(2);
-    Node *third = new Node(3);
-    Node *fourth = new Node(4);
-    Node *fifth = new Node(5);
+    head = new Node(5);
+    Node *second = new Node(6);
+    Node *third = new Node(7);
+    Node *fourth = new Node(3);
+    Node *fifth = new Node(2);
+    Node *sixth = new Node(4);
+    Node *seventh = new Node(5);
     head->next = second;
     second->next = third;
     third->next = fourth;
     fourth->next = fifth;
+    fifth->next = sixth;
+    sixth->next = seventh;
     cout << "Before : " << endl;
     display(head);
-
     cout << "After : " << endl;
-    append(head, 2);
+    append(head, 4);
     display(head);
     return 0;
 }
