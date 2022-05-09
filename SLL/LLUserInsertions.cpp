@@ -20,6 +20,7 @@ void printList()
         cout << temp->data << " ";
         temp = temp->next;
     }
+    cout << endl;
 }
 void insertFront(int val)
 {
@@ -29,6 +30,11 @@ void insertFront(int val)
 }
 void insertEnd(int val)
 {
+    if (head == NULL)
+    {
+        head = new node(val);
+        return;
+    }
     node *n = new node(val);
     node *temp = head;
     while (temp->next != NULL)
