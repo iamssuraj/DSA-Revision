@@ -1,3 +1,4 @@
+// find all permutations of an input string
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long int
