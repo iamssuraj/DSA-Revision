@@ -28,6 +28,7 @@ void permutations(string s, int left, int right)
 signed main()
 {
     string s;
+    cout<<"Enter a string : ";
     cin >> s;
     permutations(s, 0, s.size() - 1);
     return 0;
