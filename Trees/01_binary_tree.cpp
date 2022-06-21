@@ -17,6 +17,7 @@ public:
         right = NULL;
     }
 };
+
 node *createTree(node *root)
 {
     int data;
@@ -34,9 +35,51 @@ node *createTree(node *root)
     cout << "Enter data for right of " << data << " " << endl;
     root->right = createTree(root->right);
 }
+
+void levelOrderTraversal(node *root)
+{
+    queue<node *> q;
+    q.push(root);
+    q.push(NULL);
+    while (!q.empty())
+    {
+        node *temp = q.front();
+        q.pop();
+        if (temp == NULL)
+        {
+            cout << endl;
+            if (!q.empty())
+            {
+                q.push(NULL);
+            }
+        }
+        else
+        {
+            cout << temp->data << " ";
+            if (temp->left)
+            {
+                q.push(temp->left);
+            }
+            if (temp->right)
+            {
+                q.push(temp->right);
+            }
+        }
+    }
+}
 signed main()
 {
     node *root = NULL;
-    createTree(root);
+    root = createTree(root);
+
+    // data :
+    //           1
+    //     3               5
+    // -1          7        6         8
+    //-1  -1   -1   -1   -1  -1    -1  -1
+
+    // data : 1 3 -1 7 -1 -1 5 6 -1 -1 8 -1 -1
+    cout << endl;
+    levelOrderTraversal(root);
     return 0;
 }
