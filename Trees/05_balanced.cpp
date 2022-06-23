@@ -128,6 +128,8 @@ signed main()
 
     // data2 : 1 10 5 -1 -1 -1 39 -1 -1 //  balanced tree
     // data3 : 1 10 5 -1 -1 -1 -1 //  unbalanced tree
+
+    // data4 : 3 9 -1 -1 20 15 -1 -1 7 -1 -1 //  balanced
     cout << endl;
 
     cout << "Tree : " << endl;
@@ -136,11 +138,12 @@ signed main()
     cout << endl;
 
     // Bruteforce -- O(n^2)
-    if (isBalanced(root))
-        cout << "Balanced" << endl;
-    else
-        cout << "Unbalanced" << endl;
+    // if (isBalanced(root))
+    //     cout << "Balanced" << endl;
+    // else
+    //     cout << "Unbalanced" << endl;
 
+    // Efficient -- O(n)
     if (isBalancedFast(root).first)
         cout << "Balanced" << endl;
     else
