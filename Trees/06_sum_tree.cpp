@@ -83,6 +83,38 @@ bool isSumTree(node *root)
     }
     return false;
 }
+
+// Fast and efficient approach
+pair<bool, int> isSumTreeFast(node *root)
+{
+    if (root == NULL)
+    {
+        pair<bool, int> p = make_pair(true, 0);
+        return p;
+    }
+    if (root->left == NULL && root->right == NULL)
+    {
+        pair<bool, int> p = make_pair(true, root->data);
+        return p;
+    }
+
+    pair<bool, int> leftAns = isSumTreeFast(root->left);
+    pair<bool, int> rightAns = isSumTreeFast(root->right);
+
+    bool sumcheck = root->data == leftAns.second + rightAns.second;
+    pair<bool, int> ans;
+    if (leftAns.first && rightAns.first && sumcheck)
+    {
+        ans.first = true;
+        ans.second = 2 * root->data;
+        // ans.second = root->data + leftAns.second + rightAns.second;
+    }
+    else
+    {
+        ans.first = false;
+    }
+    return ans;
+}
 signed main()
 {
     node *root = NULL;
@@ -102,7 +134,15 @@ signed main()
     levelOrderTraversal(root);
     cout << endl;
     cout << endl;
-    if (isSumTree(root))
+    // if (isSumTree(root))
+    // {
+    //     cout << "Sum Tree" << endl;
+    // }
+    // else
+    // {
+    //     cout << "Not a Sum Tree" << endl;
+    // }
+    if (isSumTreeFast(root).first)
     {
         cout << "Sum Tree" << endl;
     }
