@@ -37,19 +37,37 @@ void printList()
     }
     cout << endl;
 }
-void reverse()
-{
-    node *currentNode = head, *prevNode = NULL, *nextNode = NULL;
 
-    while (currentNode != NULL)
+
+// Iterative
+
+void reverseIterative()
+{
+    node *cur = head;
+    node *prev = NULL;
+    while (cur)
     {
-        nextNode = currentNode->next;
-        currentNode->next = prevNode;
-        prevNode = currentNode;
-        currentNode = nextNode;
+        node *temp = cur->next;
+        cur->next = prev;
+        prev = cur;
+        cur = temp;
     }
-    head = prevNode;
+    head = prev;
 }
+
+
+
+// Recursive
+
+// node *reverseList(node *head)          
+// {
+//     if (head == NULL || head->next == NULL)
+//         return head;
+//     node *newHead = reverseList(head->next);
+//     head->next->next = head;
+//     head->next = NULL;
+//     return newHead;
+// }
 signed main()
 {
     int n, k;
@@ -59,7 +77,7 @@ signed main()
         cin >> k;
         insertEnd(k);
     }
-    reverse();
+    reverseIterative();
     printList();
     return 0;
 }
