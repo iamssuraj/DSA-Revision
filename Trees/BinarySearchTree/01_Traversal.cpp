@@ -3,7 +3,6 @@ using namespace std;
 #define rep(i, a, b) for (int i = a; i < b; i++)
 #define vi vector<int>
 const int N = 1e5 + 2, MOD = 1e9 + 7;
-
 class node
 {
 public:
@@ -17,23 +16,21 @@ public:
         right = NULL;
     }
 };
-
-node *createTree(node *root)
+node *insertBST(node *root, int data)
 {
-    int data;
-    cout << "Enter data for node : ";
-    cin >> data;
-    root = new node(data);
-
-    // if data == -1, return NULL; // for convinence
-    if (data == -1)
-        return NULL;
-
-    cout << "Enter data for left of " << data << " " << endl;
-    root->left = createTree(root->left);
-
-    cout << "Enter data for right of " << data << " " << endl;
-    root->right = createTree(root->right);
+    if (root == NULL)
+    {
+        node *p = new node(data);
+        return p;
+    }
+    if (data > root->data)
+    {
+        root->right = insertBST(root->right, data);
+    }
+    else
+    {
+        root->left = insertBST(root->left, data);
+    }
 }
 void levelOrderTraversal(node *root)
 {
@@ -67,39 +64,51 @@ void levelOrderTraversal(node *root)
     }
 }
 
-node *searchBST(node *root, int data)
+void PreOrder(node *root)
 {
     if (root == NULL)
-        return NULL;
-    if (root->data == data)
-        return root;
-    auto temp1 = searchBST(root->left, data);
-    if (temp1)
-        return temp1;
-    return searchBST(root->right, data);
+        return;
+    cout << root->data << " ";
+    PreOrder(root->left);
+    PreOrder(root->right);
 }
-
+void InOrder(node *root)
+{
+    if (root == NULL)
+        return;
+    InOrder(root->left);
+    cout << root->data << " ";
+    InOrder(root->right);
+}
+void PostOrder(node *root)
+{
+    if (root == NULL)
+        return;
+    PostOrder(root->left);
+    PostOrder(root->right);
+    cout << root->data << " ";
+}
 signed main()
 {
     node *root = NULL;
-    root = createTree(root);
-
-    // data :
-    //           1
-    //     3               5
-    //          7        6         8
-    //
-
-    // data1 : 1 3 -1 7 -1 -1 5 6 -1 -1 8 -1 -1
-
-    // data2 : 1 1 1 -1 -1 -1 -1
-
+    int data;
+    cout << "Enter data for insertion : \n";
+    cin >> data;
+    while (data != -1)
+    {
+        root = insertBST(root, data);
+        cin >> data;
+    }
     cout << endl;
     levelOrderTraversal(root);
     cout << endl;
+    PreOrder(root);
+
     cout << endl;
+    InOrder(root); // sorted Order
+
     cout << endl;
-    node *ans = searchBST(root, 5);
-    levelOrderTraversal(ans);
+    PostOrder(root);
+
     return 0;
 }
