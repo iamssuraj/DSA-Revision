@@ -6,13 +6,13 @@ const int N = 1e5 + 2, MOD = 1e9 + 7;
 class graph
 {
 public:
-    unordered_map<int, vector<int>> adj;
-    void addEdge(int edge1, int edge2, bool direction)
+    unordered_map<int, list<int>> adj;
+    void addEdge(int node1, int node2, bool direction)
     {
         // if direction is true, graph is directed, otherwise, graph is undirected
-        adj[edge1].push_back(edge2);
+        adj[node1].push_back(node2);
         if (!direction)
-            adj[edge2].push_back(edge1);
+            adj[node2].push_back(node1);
     }
     void printGraph()
     {
@@ -23,13 +23,11 @@ public:
         //         cout << it2 << " & ";
         //     cout << endl;
         // }
-        for(auto it:adj)
+        for (auto it : adj)
         {
             cout << it.first << "--> ";
-            for(int i=0;i<it.second.size();i++)
-            {
-                cout << it.second[i] << " ";
-            }
+            for (auto j : it.second)
+                cout << j << " ";
             cout << endl;
         }
     }
