@@ -26,6 +26,26 @@ public:
         }
     }
 };
+void DFS(unordered_map<int, list<int>> adjList, unordered_map<int, bool> &visited, int start_node)
+{
+    stack<int> st;
+    st.push(start_node);
+    visited[start_node] = true;
+    while (!st.empty())
+    {
+        int top = st.top();
+        st.pop();
+        cout << top << " "; // can be stored into a vector and returned
+        for (auto it : adjList[top])
+        {
+            if (!visited[it])
+            {
+                st.push(it);
+                visited[it] = true;
+            }
+        }
+    }
+}
 signed main()
 {
     graph g;
@@ -34,11 +54,23 @@ signed main()
     cin >> node;
     cout << "Enter number of edges : ";
     cin >> edge;
+    unordered_map<int, bool> visited;
     for (int i = 0; i < edge; i++)
     {
         int u, v;
         cin >> u >> v;
         g.addEdge(u, v, false);
+        visited.insert({u, false});
+        visited.insert({v, false});
     }
+    unordered_map<int, list<int>> adjList = g.adj;
+    cout << "Breadth First Search would look like : ";
+    // int first = adjList.begin()->first;
+    for(auto it:visited)
+    {
+        if(!it.second)
+            DFS(adjList, visited, it.first);
+    }
+    cout << endl;
     return 0;
 }

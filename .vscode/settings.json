@@ -4,6 +4,10 @@
         "iostream": "cpp",
         "array": "cpp",
         "string": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "vector": "cpp"
     }
 }
